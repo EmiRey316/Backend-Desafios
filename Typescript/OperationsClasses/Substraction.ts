@@ -1,4 +1,4 @@
-export default class Divide{
+export default class Substraction{
     private num1: number;
     private num2: number;
 
@@ -8,6 +8,6 @@ export default class Divide{
     }
 
     result() {
-        return this.num1 / this.num2
+        return this.num1 - this.num2
     };
 }

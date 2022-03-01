@@ -7,7 +7,7 @@ export default class Sum{
         this.num2 = num2
     }
 
-    private result() {
-        this.num1 + this.num2
+    result() {
+        return this.num1 + this.num2
     };
 }
