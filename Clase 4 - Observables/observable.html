@@ -16,9 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/8.0.0-alpha.2/rxjs.umd.min.js" integrity="sha512-OqhcXPOUizQsMGqilNNtN3bU3Sy9ELHyNm/WyjtlyJ/2/Wpl5PjqkvX1eAE5q2X74z2mnCqv4Lcvf7lqLOFb5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <script type="module">
-        const {Observable} = rxjs;
-        const {fromEvent} = rxjs;
-        const {map} = rxjs.operators;
+        const { fromEvent } = rxjs;
 
         const textBox = document.getElementById("textBox");
         const textReturned = document.getElementById("textReturned");
@@ -39,27 +37,22 @@
 
 
 
-        let text = textBox.fromEvent(textBox, "keyup").pipe(
-            map(val => textBox.value)
-        )
-        
-        let observable = new Observable((obs) => {
-            obs.next(text);
-            if(text === "error") {
-                    obs.error();
-                    cleanInput();
-                } else if(text === "complete") {
-                    obs.complete();
-                    cleanInput();
-                }
-        })
+        const observableInput = fromEvent(textBox, 'input');
 
+        const next = (evento) => {
+            let texto = evento.target.value;
 
-        let observer = observable.subscribe({
-            next:(value) => textReturned.innerHTML = reverseString(value),
-            error:(err) => console.error("Observable terminado por error"),
-            complete:() => console.log("Observable completado correctamente")
-        })
+            if (texto === 'error') {
+                console.error('Observable terminado por error');
+                cleanInput();
+            } else if (texto === 'complete') {
+                console.log('Observable completado correctamente');
+                cleanInput();
+            } else
+                textReturned.innerHTML = reverseString(texto);
+        }
+
+        const observer = observableInput.subscribe(next)
         
 
         setTimeout(() => {
