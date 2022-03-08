@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="textBox">
+    <span id="textReturned"></span>
+
+
+
+    <!--Script CDN de rxjs-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/8.0.0-alpha.2/rxjs.umd.min.js" integrity="sha512-OqhcXPOUizQsMGqilNNtN3bU3Sy9ELHyNm/WyjtlyJ/2/Wpl5PjqkvX1eAE5q2X74z2mnCqv4Lcvf7lqLOFb5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!--Script con la tarea-->
+    <script type="module">
+        const {fromEvent} = rxjs;
+        const {map, finalize} = rxjs.operators;
+
+
+        const textBox = document.getElementById("textBox");
+        const textReturned = document.getElementById("textReturned");
+
+
+        //Función que limpia el html como se pide en la letra.
+        const cleanInput = () => {
+            textBox.disabled = true;
+            textReturned.innerHTML = "";
+        }
+
+
+        //Función que retorna el string pasado por parametro pero al revés.
+        const reverseString = (str) => {
+            return str.split("").reverse().join("");
+        }
+
+
+        let observable = fromEvent(textBox, "keyup").pipe(
+            map(val => {
+                if(textBox.value === "error") {
+                    cleanInput();
+                    throw new Error();
+                } else if(textBox.value === "complete") {
+                    observer.unsubscribe();
+                    cleanInput();
+                    console.log("Observable completado correctamente");
+                }
+
+                return textBox.value;
+            })
+        )
+
+        let observer = observable.subscribe({
+            next:(value) => textReturned.innerHTML = reverseString(value),
+            error:(err) => console.error("Observable terminado por error")
+        })
+        
+
+        setTimeout(() => {
+            observer.unsubscribe();
+            cleanInput();
+            console.log("Tiempo del observable finalizado");
+        }, 30000)
+
+    </script>
+    
+</body>
+</html>
