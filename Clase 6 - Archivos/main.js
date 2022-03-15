@@ -39,26 +39,23 @@ class Archive {
 }
 
 
-//Clase para cargar los productos más facilmente.
-class Product {
-    constructor(title, price, thumbnail) {
-        this.title = title;
-        this.price = price;
-        this.thumbnail = thumbnail;
-    }
+//Función para cargar nuevos productos con el formato adecuado.
+const newProduct = async(title, price, thumb) => {
+    await products.save({
+        title: title,
+        price: price,
+        thumbnail: thumb
+    })
 }
+
 
 const products = new Archive("products.txt");
 
 
-let escuadra = new Product("Escuadra", 100, "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Squadra_45.jpg/220px-Squadra_45.jpg");
-let calculadora = new Product("Calculadora", 200, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Casio_fx-85WA_20050529.jpg/330px-Casio_fx-85WA_20050529.jpg");
-let globoTerraqueo = new Product("Globo Terraqueo", 300, "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/GlobeSK.jpg/450px-GlobeSK.jpg");
-
 const saves = async() => {
-    await products.save(escuadra);
-    await products.save(calculadora);
-    await products.save(globoTerraqueo);
+    await newProduct("Escuadra", 100, "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Squadra_45.jpg/220px-Squadra_45.jpg");
+    await newProduct("Calculadora", 200, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Casio_fx-85WA_20050529.jpg/330px-Casio_fx-85WA_20050529.jpg");
+    await newProduct("Globo Terraqueo", 300, "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/GlobeSK.jpg/450px-GlobeSK.jpg");
 
     await products.read();
 }
