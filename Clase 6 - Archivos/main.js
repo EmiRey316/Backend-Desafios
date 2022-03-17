@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 
 //Clase pedida en el desafío.
 class Archive {
@@ -23,7 +23,7 @@ class Archive {
             let data = await this.read();
             let id = data.length + 1;
             data.push({...product, id: id});
-            await fs.promises.writeFile("products.txt", JSON.stringify(data));
+            await fs.promises.writeFile(this.name, JSON.stringify(data));
         } catch(err) {
             console.log("No se pudo guardar", err)
         }
@@ -49,7 +49,7 @@ const newProduct = async(title, price, thumb) => {
 }
 
 
-const products = new Archive("products.txt");
+const products = new Archive("./products.txt");
 
 
 const saves = async() => {
@@ -60,5 +60,3 @@ const saves = async() => {
     await products.read();
 }
 saves();
-
-
