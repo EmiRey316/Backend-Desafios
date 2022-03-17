@@ -24,7 +24,7 @@ const productList = async() => {
 //Función para buscar un producto random
 const randomProduct = async() => {
     let itemList = await productList();
-    let randomIndex = Math.floor(Math.random()*(itemList.length - 1));
+    let randomIndex = Math.floor(Math.random()*(itemList.length));
     return itemList[randomIndex];
 }
 
