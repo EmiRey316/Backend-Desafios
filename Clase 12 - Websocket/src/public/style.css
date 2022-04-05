@@ -1,0 +1,17 @@
+#productsDiv, #chatDiv {
+    background-color: lightgray;
+    width: 70%;
+}
+
+h2 {
+    color: blue;
+}
+
+#productListTitle {
+    color: red;
+}
+
+#productsTable {
+    background-color: black;
+    color: white;
+}
