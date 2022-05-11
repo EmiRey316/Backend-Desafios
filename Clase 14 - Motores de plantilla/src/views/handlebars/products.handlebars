@@ -1,0 +1,29 @@
+<a href="/"><button class="btn btn-success">Formulario</button></a>
+<h1 class="text-center mt-5">Vista de Productos</h1>
+{{#if productsList}}
+
+    <div class="mx-5">
+        <table class="table text-center rounded">
+            <tr class="row">
+                <th scope="col" class="col-4">Nombre</th>
+                <th scope="col" class="col-4">Precio</th>
+                <th scope="col" class="col-4">Foto</th>
+            </tr>
+
+            {{#each productsList}}
+                <tr scope="row" class="row">
+                    <td class="col-4">{{this.name}}</td>
+                    <td class="col-4">${{this.price}}</td>
+                    <td class="col-4"><img width="20%" src={{this.thumbnail}} alt="Foto {{this.name}}"></td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+
+{{else}}
+
+    <div id="productListEmpty" class="text-center rounded mx-auto">
+        <p class="p-3">No se encontraron productos</p>
+    </div>
+
+{{/if}}

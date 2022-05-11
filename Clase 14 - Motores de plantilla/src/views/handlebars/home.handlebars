@@ -1,0 +1,16 @@
+<a href="/productos"><button class="btn btn-success">Productos</button></a>
+<div id="productFormDiv">
+    <h1>Ingrese un Producto</h1>
+    <form id="productForm" class="m-4" action="/productos" method="post">
+        <label for="name" class="form-label"><strong>Nombre</strong></label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="John" required>
+
+        <label for="price" class="form-label"><strong>Precio</strong></label>
+        <input type="number" name="price" id="price" class="form-control" placeholder="Doe" required>
+
+        <label for="thumbnail" class="form-label"><strong>Foto URL</strong></label>
+        <input type="text" name="thumbnail" id="thumbnail" class="form-control" placeholder="https://urlFoto.com" required>
+
+        <button type="submit" class="btn btn-success mt-3">Enviar</button>
+    </form>
+</div>
