@@ -18,6 +18,6 @@
     "moment": "^2.29.2",
     "mongoose": "^6.3.3",
     "normalizr": "^3.6.2",
-    "socket.io": "^4.4.1"
+    "socket.io": "^4.5.0"
   }
 }

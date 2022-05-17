@@ -31,8 +31,8 @@ app.set("view engine", "handlebars");
 
 
 
-// let productsList = new Archive("./src/Files/productsList.txt");
-// let chatRecord = new Archive("./src/Files/chatRecord.txt");
+let productsList = new Archive("./src/Files/productsList.txt");
+let chatRecord = new Archive("./src/Files/chatRecord.txt");
 
 
 
@@ -49,10 +49,6 @@ io.on('connection', async(socket)=>{
     let chatLog = await chatRecord.read();
     socket.emit("chatLog", chatLog);
 
-    socket.on("product", async(data) => {
-        await productsList.save(data);
-        io.emit("newProduct", data);
-    })
 
     socket.on('message', async(data) => {
         let newMessage = {...data, date: moment().format("DD/MM/YYYY HH:mm:ss")};

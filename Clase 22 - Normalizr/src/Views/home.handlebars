@@ -1,14 +1,45 @@
 <div id="chatDiv" class="m-4 p-4">
-    <h2>Centro de mensajes</h2>
+    <h1 class="text-center">Centro de mensajes</h1>
+    <h2 class="text-center">(Compresión: %)</h2>
+
+    <div id="authorFormDiv">
+        <form action="" id="authorForm">
+            <input class="form-control" type="email" name="authorMail" id="authorMail" placeholder="john@example.com" required>
+            <br>
+
+            <input class="form-control" type="text" name="authorName" id="authorName" placeholder="John" required>
+            <br>
+
+            <input class="form-control" type="text" name="authorLastName" id="authorLastName" placeholder="Doe" required>
+            <br>
+
+            <input class="form-control" type="number" name="authorAge" id="authorAge" placeholder="30" required>
+            <br>
+
+            <input class="form-control" type="text" name="authorAlias" id="authorAlias" placeholder="Joe" required>
+            <br>
+
+            <select class="form-control" type="select" name="authorAvatar" id="authorAvatar" required>
+                <option value="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">Man</option>
+                <option value="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png">Woman</option>
+                <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/boy_person_avatar_kid-512.png">Kid</option>
+                <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-512.png">Girl</option>
+                <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png">Batman</option>
+                <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/avocado_scream_avatar_food-512.png">Avocado</option>
+            </select>
+
+        </form>
+    </div>
 
     <hr>
 
     <div id="chatLog" class="mb-2"></div>
     <div class="row justify-content-around">
         <input type="text" name="chatInput" id="chatInput" class="col-9 border-0 rounded" placeholder="Ingresá un mensaje...">
-        <button id="sendBtn" type="button" class="btn btn-primary col-2">Enviar</button>
+        <button id="sendBtn" type="submit" class="btn btn-primary col-2" form="authorForm">Enviar</button>
     </div>
 </div>
 
 
 <script src="/socket.io/socket.io.js"></script>
+<script src="../main.js"></script>

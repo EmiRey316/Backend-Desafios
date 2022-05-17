@@ -1,17 +1,32 @@
-<div id="productsTest" class="mx-5">
-    <table class="table text-center rounded">
-        <tr class="row">
-            <th scope="col" class="col-4">Nombre</th>
-            <th scope="col" class="col-4">Precio</th>
-            <th scope="col" class="col-4">Foto</th>
-        </tr>
+<link rel="stylesheet" href="/css/productsTest.css">
 
-        {{#each productList}}
-            <tr scope="row" class="row">
-                <td scope="col" class="col-4">{{this.name}}</td>
-                <td scope="col" class="col-4">${{this.price}}</td>
-                <td scope="col" class="col-4"><img src={{this.photo}} alt={{this.name}}></td>
+<h1 class="text-center mt-5">Vista de Productos</h1>
+
+{{#if productList}}
+
+    <div id="productsTest" class="mx-5">
+        <table class="table text-center rounded">
+            <tr class="row">
+                <th scope="col" class="col-4">Nombre</th>
+                <th scope="col" class="col-4">Precio</th>
+                <th scope="col" class="col-4">Foto</th>
             </tr>
-        {{/each}}
-    </table>
-</div>
+
+            {{#each productList}}
+                <tr scope="row" class="row">
+                    <td class="col-4">{{this.name}}</td>
+                    <td class="col-4">${{this.price}}</td>
+                    <td class="col-4"><img width="20%" src={{this.photo}} alt={{this.name}}></td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+
+{{else}}
+
+    <div id="productListEmpty" class="text-center rounded mx-auto">
+        <p class="p-3">No se encontraron productos</p>
+    </div>
+
+{{/if}}
+

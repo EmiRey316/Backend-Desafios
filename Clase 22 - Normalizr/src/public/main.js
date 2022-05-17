@@ -1,90 +1,41 @@
-let userEmail;
-
-swal({
-    title: "Ingrese su email",
-    content: {
-        element: "input",
-        attributes: {
-            placeholder: "ejemplo@mail.com"
-        }
-    },
-    closeOnClickOutside: false,
-})
-.then(res => {
-    userEmail = res
-})
-
-
 const socket = io();
-const productsForm = document.getElementById("productsForm");
+const authorForm = document.getElementById("authorForm");
 const chatInput = document.getElementById("chatInput");
 const sendBtn = document.getElementById("sendBtn")
 
 
 
-productsForm.addEventListener("submit", (e) => {
-	e.preventDefault();
-	let data = new FormData(productsForm);
-	let obj = {author: userEmail};
-	data.forEach((value, key) => obj[key] = value);
-    socket.emit("product", obj);
-})
-
-
-
 //Función al servidor que envía el mensaje escrito.
-const saveMessage = () => {
+const saveMessage = (authorInfo) => {
     if(chatInput.value.trim().length > 0) {
         socket.emit("message", {
-            user: userEmail,
+            ...authorInfo,
             message: chatInput.value,
         });
         chatInput.value = "";
     }
 }
 
-//Evento que eschucha la escritura en el input del chat.
-chatInput.addEventListener("keyup", evt => {
-    if(evt.key === "Enter"){
-        saveMessage();
-    }
-})
-
-sendBtn.addEventListener("click", () => {
-    saveMessage();
-})
-
-
-socket.on("productsLog", data => {
-    const productsTableBody = document.getElementById("productsTableBody");
-    let productList = "";
-    data.forEach(product => {
-        productList = productList + `<tr>
-                <td>${product.productName}</td>
-                <td>$ ${product.productPrice}</td>
-                <td>${product.productThumb}</i>
-                </tr>`
-    })
-    productsTableBody.innerHTML = productList;
-})
-
-
-
-socket.on("newProduct", data => {
-    const productsTableBody = document.getElementById("productsTableBody");
+authorForm.addEventListener("submit", (e) => {
+	e.preventDefault();
+	let data = new FormData(authorForm);
+    let obj = {};
+	data.forEach((value, key) => obj[key] = value);
+    saveMessage(obj);
 })
 
 
 
 //Evento de Websocket que eschucha el envío del cha desde el servidor.
-socket.on("chatLog", data => {
+socket.on("chatLog", data => { 
     const chatLog = document.getElementById("chatLog");
     let messages = "";
     data.forEach(message => {
         messages = messages + `
-                <strong>${message.user}</strong>
+                <strong>${message.authorMail}</strong>
                 <span>[${message.date}]:</span>
-                <i>${message.message}</i>
+                <i>${message.message} </i>
+                <img width="5%" src=${message.authorAvatar}>
                 </br>`
     })
     chatLog.innerHTML = messages;
@@ -96,13 +47,17 @@ socket.on("newMessage", data => {
     let dateSpan = document.createElement("span");
     let messageSpan = document.createElement("i");
     let lineBreak = document.createElement("br");
+    let avatar = document.createElement("img");
 
-    userSpan.append(data.user);
+    userSpan.append(data.authorMail);
     dateSpan.append(` [${data.date}]: `);
-    messageSpan.append(data.message);
+    messageSpan.append(`${data.message} `);
+    avatar.setAttribute("src", data.authorAvatar);
+    avatar.setAttribute("width", "5%");
 
     chatLog.append(userSpan);
     chatLog.append(dateSpan);
     chatLog.append(messageSpan);
+    chatLog.append(avatar);
     chatLog.append(lineBreak);
 })
