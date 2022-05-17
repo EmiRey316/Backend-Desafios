@@ -1,6 +1,6 @@
-const fs = require("fs");
+import fs from "fs";
 
-module.exports = class Archive {
+class Archive {
     constructor(name) {
         this.name = name
     }
@@ -33,3 +33,5 @@ module.exports = class Archive {
         }
     }
 }
+
+export default Archive;
