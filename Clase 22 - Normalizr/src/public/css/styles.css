@@ -1,0 +1,29 @@
+#productsDiv, #chatDiv {
+    background-color: lightgray;
+    width: 70%;
+}
+
+h2 {
+    color: blue;
+}
+
+#productListTitle {
+    color: red;
+}
+
+#productsTable {
+    background-color: black;
+    color: white;
+}
+
+#chatLog strong {
+    color: blue;
+}
+
+#chatLog span {
+    color: brown;
+}
+
+#chatLog i {
+    color: green;
+}
