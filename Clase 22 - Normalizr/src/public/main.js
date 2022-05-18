@@ -38,9 +38,7 @@ socket.on("chatLog", (data, compressionPercent) => {
     const chatSchema = new normalizr.schema.Entity("chat", { chat: [{author: authorSchema}] });
     let denormalizedChat = normalizr.denormalize(data.result, chatSchema, data.entities)
     
-console.log(denormalizedChat)
     if(!denormalizedChat) {
-        console.log("entra");
         return compessionSpan.innerHTML = 0;
     }
     

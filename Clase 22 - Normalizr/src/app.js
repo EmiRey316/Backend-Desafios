@@ -5,10 +5,8 @@ const { Server } = require("socket.io");
 const util = require("util");
 
 const { app, server } = require("./server.js");
-const Archive = require("./fileManager.js");
+const chatRecord = require("./Container/DAOs/chat/chatDao.js");
 const Routes = require("./Routes")
-
-let chatRecord = new Archive("./src/Files/chatRecord.txt");
 
 
 Routes(app);
