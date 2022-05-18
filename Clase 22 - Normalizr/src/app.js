@@ -1,28 +1,17 @@
-const express = require("express");
+require("dotenv").config()
+
 const handlebars = require("express-handlebars");
-const moment = require("moment");
 const { Server } = require("socket.io");
-const { normalize, denormalize } = require("normalizr");
 const util = require("util");
 
+const { app, server } = require("./server.js");
 const Archive = require("./fileManager.js");
-const chatSchema = require("./Utils/messageNormalizer.js")
+const Routes = require("./Routes")
+
+let chatRecord = new Archive("./src/Files/chatRecord.txt");
 
 
-
-////////////////////////////////////////////
-//      Inicialización del servidor       //
-////////////////////////////////////////////
-const app = express();
-const PORT = process.env.POR || 8080;
-const server = app.listen(PORT, () => {
-    console.log(`Listening on PORT ${PORT}`);
-})
-
-app.use(express.static(__dirname+"/public"));
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
-
+Routes(app);
 
 
 ////////////////////////////////////////////
@@ -34,10 +23,6 @@ app.set("view engine", "handlebars");
 
 
 
-let chatRecord = new Archive("./src/Files/chatRecord.txt");
-
-
-
 
 ////////////////////////////////////////////
 //               Websocket                //
@@ -45,6 +30,9 @@ let chatRecord = new Archive("./src/Files/chatRecord.txt");
 const io = new Server(server);
 
 io.on('connection', async(socket)=>{
+    const { normalize } = require("normalizr");
+    const chatSchema = require("./Utils/messageNormalizer.js");
+
     let chatLog = await chatRecord.read();
     
     //console.log(util.inspect(chatLog, false, 12, true));
@@ -61,34 +49,10 @@ io.on('connection', async(socket)=>{
 
 
     socket.on('message', async(data) => {
+        const moment = require("moment");
+
         let newMessage = {...data, date: moment().format("DD/MM/YYYY HH:mm:ss")};
         await chatRecord.save(newMessage);
         io.emit("newMessage", newMessage);
     })
-})
-
-
-
-////////////////////////////////////////////
-//                Routes                  //
-////////////////////////////////////////////
-app.get("/", (req, res) => {
-    res.render("home", {title: "Centro de mensajes"})
-})
-
-
-app.get("/api/productos-test", (req, res) => {
-    const faker = require("faker");
-    faker.locale = "es";
-
-    let productList = [];
-    for(let i = 1; i <= 5; i++) {
-        productList.push({
-            name: faker.commerce.product(),
-            price: faker.commerce.price(100, 1000),
-            photo: faker.image.animals(640, 480, true)
-        })
-    }
-
-    res.render("products", {title: "Productos test", productList});
 })

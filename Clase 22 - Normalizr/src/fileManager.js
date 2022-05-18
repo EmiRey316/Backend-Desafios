@@ -18,7 +18,7 @@ module.exports = class Archive {
     save = async(record) => {
         try {
             let data = await this.read();
-            if(Object.keys(data).length == 0) data = {id: 1, chat: []
+            if(Object.keys(data).length == 0) data = {id: "chat", chat: []
             }            
             let id = data.chat.length + 1;
             data.chat.push({id, ...record});

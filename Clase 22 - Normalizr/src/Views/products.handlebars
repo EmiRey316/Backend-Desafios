@@ -2,7 +2,7 @@
 
 <h1 class="text-center mt-5">Vista de Productos</h1>
 
-{{#if productList}}
+{{#if data}}
 
     <div id="productsTest" class="mx-5">
         <table class="table text-center rounded">
@@ -12,7 +12,7 @@
                 <th scope="col" class="col-4">Foto</th>
             </tr>
 
-            {{#each productList}}
+            {{#each data}}
                 <tr scope="row" class="row">
                     <td class="col-4">{{this.name}}</td>
                     <td class="col-4">${{this.price}}</td>
