@@ -1,25 +1,25 @@
 <div id="chatDiv" class="m-4 p-4">
     <h1 class="text-center">Centro de mensajes</h1>
-    <h2 class="text-center">(Compresión: %)</h2>
+    <h2 class="text-center">(Compresión: <span id="compessionSpan"></span>%)</h2>
 
     <div id="authorFormDiv">
         <form action="" id="authorForm">
-            <input class="form-control" type="email" name="authorMail" id="authorMail" placeholder="john@example.com" required>
+            <input class="form-control" type="email" name="email" id="authorMail" placeholder="john@example.com" required>
             <br>
 
-            <input class="form-control" type="text" name="authorName" id="authorName" placeholder="John" required>
+            <input class="form-control" type="text" name="name" id="authorName" placeholder="John" required>
             <br>
 
-            <input class="form-control" type="text" name="authorLastName" id="authorLastName" placeholder="Doe" required>
+            <input class="form-control" type="text" name="lastName" id="authorLastName" placeholder="Doe" required>
             <br>
 
-            <input class="form-control" type="number" name="authorAge" id="authorAge" placeholder="30" required>
+            <input class="form-control" type="number" name="age" id="authorAge" placeholder="30" required>
             <br>
 
-            <input class="form-control" type="text" name="authorAlias" id="authorAlias" placeholder="Joe" required>
+            <input class="form-control" type="text" name="alias" id="authorAlias" placeholder="Joe" required>
             <br>
 
-            <select class="form-control" type="select" name="authorAvatar" id="authorAvatar" required>
+            <select class="form-control" type="select" name="avatar" id="authorAvatar" required>
                 <option value="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">Man</option>
                 <option value="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png">Woman</option>
                 <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/boy_person_avatar_kid-512.png">Kid</option>
@@ -40,6 +40,6 @@
     </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="../main.js"></script>

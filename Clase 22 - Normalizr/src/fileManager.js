@@ -7,18 +7,21 @@ module.exports = class Archive {
 
     read = async() => {
         try {
+            if(!fs.existsSync(this.name)) return {}
             let content = JSON.parse(await fs.promises.readFile(this.name, "utf-8"));
             return content
         } catch(err) {
-            return []
+            console.log("No se pudo leer", err)
         }
     }
 
     save = async(record) => {
         try {
             let data = await this.read();
-            let id = data.length + 1;
-            data.push({id, ...record});
+            if(Object.keys(data).length == 0) data = {id: 1, chat: []
+            }            
+            let id = data.chat.length + 1;
+            data.chat.push({id, ...record});
             await fs.promises.writeFile(this.name, JSON.stringify(data));
         } catch(err) {
             console.log("No se pudo guardar", err)

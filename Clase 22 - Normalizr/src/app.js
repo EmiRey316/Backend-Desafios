@@ -2,8 +2,11 @@ const express = require("express");
 const handlebars = require("express-handlebars");
 const moment = require("moment");
 const { Server } = require("socket.io");
+const { normalize, denormalize } = require("normalizr");
+const util = require("util");
 
 const Archive = require("./fileManager.js");
+const chatSchema = require("./Utils/messageNormalizer.js")
 
 
 
@@ -31,7 +34,6 @@ app.set("view engine", "handlebars");
 
 
 
-let productsList = new Archive("./src/Files/productsList.txt");
 let chatRecord = new Archive("./src/Files/chatRecord.txt");
 
 
@@ -43,11 +45,19 @@ let chatRecord = new Archive("./src/Files/chatRecord.txt");
 const io = new Server(server);
 
 io.on('connection', async(socket)=>{
-    let productsLog = await productsList.read();
-    socket.emit("productsLog", productsLog);
-
     let chatLog = await chatRecord.read();
-    socket.emit("chatLog", chatLog);
+    
+    //console.log(util.inspect(chatLog, false, 12, true));
+    let lgNormal = JSON.stringify(chatLog).length;
+
+    let normalizedChat = normalize(chatLog, chatSchema);
+    //console.log(util.inspect(normalizedChat, false, 12, true));
+    let lgNormalized = JSON.stringify(normalizedChat).length;
+
+    let compressionPercent = (lgNormalized * 100) / lgNormal;
+
+
+    socket.emit("chatLog", normalizedChat, compressionPercent);
 
 
     socket.on('message', async(data) => {
