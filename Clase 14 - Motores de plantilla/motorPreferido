@@ -1,6 +1,0 @@
-Usando Los 3 Motores, el que me resultó más diferente fue Pug y esa diferencia me dió problemas, sobre todo con el tema de que se maneje con identación. Si bien estoy acostubmbrado a identar, el hecho de que no tenga etiquetas de cierre me lo dificultó y me llevó a cometer errores.
-Además, también es distinta la forma de ingresar los atributos y dan problemas las imágenes. Por todo esto, no creo que sea Pug el que vaya a utilizar.
-
-Por otra parte, creo que tanto Ejs como Handlebars son bastante similares y se parecen mucho más al formato de HTML clásico. La diferencia entre ambos es la forma de agregar código JS, que en el caso de Handlebars cambia algunos formatos. Sin embargo, a pesar de eso, Handlebars me pareció más legible y simple.
-Una ventaja que tenía Ejs era la parte de Partials, pero encontré que también se puede usar en Handlebrs, facilitando el uso de "módulos".
-En resumen, creo que podría usar cualquiera de estos últimos, pero ya inicié con Handlebars y de momento creo que voy a seguir con este para el proyecto.
