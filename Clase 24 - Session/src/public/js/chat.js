@@ -1,16 +1,19 @@
 const socket = io();
-const authorForm = document.getElementById("authorForm");
-const chatInput = document.getElementById("chatInput");
-const sendBtn = document.getElementById("sendBtn")
+const messageBtn = document.getElementById("messageBtn");
+const userName = document.getElementById("userName");
+const avatar = document.getElementById("avatar");
 
 
 
 //Función que emite al servidor el mensaje escrito, en caso de que se escriba algo.
-const saveMessage = (authorInfo) => {
+const saveMessage = (message) => {
     if(chatInput.value.trim().length > 0) {
         socket.emit("message", {
-            author: authorInfo,
-            text: chatInput.value,
+            author: {
+                name: userName.textContent,
+                avatar: avatar.src
+            },
+            text: message,
         });
         chatInput.value = "";
     }
@@ -18,19 +21,17 @@ const saveMessage = (authorInfo) => {
 
 
 //Escucha de evento al enviar mensaje, con los datos del formulario.
-authorForm.addEventListener("submit", (e) => {
+messageBtn.addEventListener("click", (e) => {
 	e.preventDefault();
-	let data = new FormData(authorForm);
-    let obj = {};
-	data.forEach((value, key) => obj[key] = value);
-    saveMessage(obj);
+	const chatInput = document.getElementById("chatInput");
+    saveMessage(chatInput.value);
 })
 
 
 // Evento de Websocket que eschucha el envío del chat desde el servidor.
 socket.on("chatLog", (data, compressionPercent) => { 
     const chatLog = document.getElementById("chatLog");
-    const compessionSpan = document.getElementById("compessionSpan");
+    const compressionSpan = document.getElementById("compressionSpan");
     let messages = "";
 
     //Schemas para normalizr
@@ -39,14 +40,14 @@ socket.on("chatLog", (data, compressionPercent) => {
     let denormalizedChat = normalizr.denormalize(data.result, chatSchema, data.entities)
     
     if(!denormalizedChat) {
-        return compessionSpan.innerHTML = 0;
+        return compressionSpan.innerHTML = 0;
     }
     
     
 
     denormalizedChat.chat.forEach(message => {
         messages = messages + `
-                <strong>${message.author.email}</strong>
+                <strong>${message.author.name}</strong>
                 <span>[${message.date}]:</span>
                 <i>${message.text} </i>
                 <img width="5%" src=${message.author.avatar}>
@@ -54,7 +55,7 @@ socket.on("chatLog", (data, compressionPercent) => {
     })
     chatLog.innerHTML = messages;
 
-    compessionSpan.innerHTML = compressionPercent.toFixed(2);
+    compressionSpan.innerHTML = compressionPercent.toFixed(2);
 })
 
 
@@ -67,7 +68,7 @@ socket.on("newMessage", data => {
     let lineBreak = document.createElement("br");
     let avatar = document.createElement("img");
 
-    userSpan.append(data.author.email);
+    userSpan.append(data.author.name);
     dateSpan.append(` [${data.date}]: `);
     messageSpan.append(`${data.text} `);
     avatar.setAttribute("src", data.author.avatar);

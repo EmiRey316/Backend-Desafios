@@ -29,8 +29,18 @@ h1, h2 {
 }
 
 
+#welcomeDiv, #logoutDiv {
+    width: 70%;
+    padding: 1% 5%;
+    border-radius: 5px;
+    margin-top: 5%;
+}
+
 #welcomeDiv {
     background-color: lightgreen;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #welcomeSpan {
@@ -38,7 +48,8 @@ h1, h2 {
 }
 
 
-#goodbyeDiv {
+#logoutDiv {
     background-color: lightblue;
     color: Blue;
+    text-align: center;
 }

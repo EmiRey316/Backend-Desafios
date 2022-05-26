@@ -4,8 +4,9 @@ class Login {
     }
 
     loginUser(req, res) {
-        const { userName } = req.body;
+        const { userName, avatar } = req.body;
         req.session.user = userName;
+        req.session.avatar = avatar;
         res.redirect("/");
     }
 }

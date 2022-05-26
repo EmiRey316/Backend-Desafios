@@ -1,7 +1,7 @@
 const express = require("express");
 
 const homeController = require("./homeController");
-const validateSession = require("../Middlewares")
+const { validateSession } = require("../Middlewares")
 
 
 let homeRouter = express.Router();

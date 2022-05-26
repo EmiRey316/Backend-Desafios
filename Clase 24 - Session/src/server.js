@@ -33,7 +33,8 @@ app.use(session({
     }),
 
     secret: SECRET,
-    cookie: {maxAge: 600000}, //10 min de session
+    cookie: {maxAge: 60000}, //1 min de session
+    rolling: true,
     resave: true,
     saveUninitialized: true
 }))

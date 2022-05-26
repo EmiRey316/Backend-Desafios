@@ -4,7 +4,7 @@ const util = require("util");
 
 const { app, server } = require("./server.js");
 const chatRecord = require("./Container/DAOs/chat/chatDao.js");
-const Routes = require("./Routes")
+const Routes = require("./Routes");
 
 
 Routes(app);

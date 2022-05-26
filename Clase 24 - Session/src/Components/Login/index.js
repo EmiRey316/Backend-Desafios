@@ -1,10 +1,11 @@
 const express = require("express");
 
 const loginController = require("./loginController");
+const { isLogged } = require("../Middlewares")
 
 
 let loginRouter = express.Router();
-loginRouter.get("/", loginController.get)
+loginRouter.get("/", isLogged, loginController.get)
 
 loginRouter.post("/", loginController.loginUser)
 

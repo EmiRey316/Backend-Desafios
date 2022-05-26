@@ -1,9 +1,14 @@
-const { app } = require("faker/lib/locales/en");
-
 class Logout {
     get(req, res) {
-        
-        res.render("logout", {user: req.session.user});
+        let user = req.session.user;
+        req.session.destroy(err => {
+            if(!err) {
+                return res.render("logout", {user: user});
+            }
+
+            res.send({status: "Logout ERROR",
+                body: err})
+        })
     }
 }
 
