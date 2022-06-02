@@ -35,6 +35,14 @@ module.exports = class MongoDB {
         }
     }
 
+    findById = async(id) => {
+        try {
+            return await this.model.findOne({id: id});
+        } catch (error) {
+            console.error("No se pudo buscar el usuario", error)
+        }
+    }
+
     deleteAll = async() => {
         try {
             await await this.model.drop();

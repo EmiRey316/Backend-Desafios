@@ -9,6 +9,14 @@ class Login {
         req.session.avatar = avatar;
         res.redirect("/");
     }
+
+    fail(req, res) {
+        res.render("./session/fail", {
+            title: "Login error",
+            type: "LOGIN",
+            originalRoute: "/login"
+        })
+    }
 }
 
 

@@ -1,12 +1,10 @@
 const validateSession = (req, res, next) => {
-    if(!req.session.user) return res.redirect("/login");
+    if(!req.isAuthenticated()) return res.redirect("/login");
     next();
 }
 
 const isLogged = (req, res, next) => {
-    if(req.session.user) {
-        return res.redirect("/");
-    }
+    if(req.isAuthenticated()) return res.redirect("/");
     next();
 }
 

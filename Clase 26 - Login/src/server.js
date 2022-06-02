@@ -65,13 +65,13 @@ const LocalStrategy = require("passport-local").Strategy;
 const usersList = require("./Container/DAOs/users")
 
 passport.use("login", new LocalStrategy(async (username, password, done) => {
-    console.log("aca si")
     try {
-        console.log("Entra")
         let user = await usersList.findByEmail(username);
         if(!user) return done(null, false);
 
-        if(user.password !== password) return done(null, false);
+        if(user.password !== password) {
+            return done(null, false);
+        }
 
         return done(null, user);
     } catch (error) {
@@ -81,23 +81,17 @@ passport.use("login", new LocalStrategy(async (username, password, done) => {
 
 
 passport.serializeUser((user, done)=>{
-    console.log("serialize")
-    done(null, user.email);
+    done(null, user.id);
 });
 
-passport.deserializeUser((username, done)=>{
-    console.log("deserialize")
-    let user = usersList.findByEmail(username);
+passport.deserializeUser((id, done)=>{
+    let user = usersList.findById(id);
     done(null, user);
 });
 
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
-app.post("/login", passport.authenticate('login', {failureRedirect:"/productsList", successRedirect:"/"}))
 
 
 
