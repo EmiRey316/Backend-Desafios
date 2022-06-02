@@ -1,0 +1,27 @@
+<div class="classicDiv">
+    <h1 class="mb-2">Registro de Usuario</h1>
+    <form action="/signUp" method="post">
+        <label for="userName" class="form-label">Ingrese su nombre:</label>
+        <input type="text" name="userName" id="userName" class="form-control" placeholder="John" required>
+
+        <label for="email" class="form-label">Ingrese su mail:</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="mail@example.com" required>
+
+        <label for="password" class="form-label">Elija una contraseña:</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+
+        <label for="avatar" class="form-label mt-3">Elija un avatar:</label>
+        <select class="form-control" type="select" name="avatar" id="avatar" required>
+            <option value="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png" data-thumbnail="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">Man</option>
+            <option value="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png">Woman</option>
+            <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/boy_person_avatar_kid-512.png">Kid</option>
+            <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-512.png">Girl</option>
+            <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png">Batman</option>
+            <option value="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/avocado_scream_avatar_food-512.png">Avocado</option>
+        </select>
+
+        <button type="submit" class="btn btn-success mt-3">Enviar</button>
+    </form>
+    <hr>
+    <p>Ya estás registrado? <a href="/login">Login</a></p>
+</div>
