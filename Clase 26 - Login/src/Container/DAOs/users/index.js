@@ -5,7 +5,7 @@ const { UsersSchema } = require("../../../Models/mongoModels.js");
 class UsersDao extends MongoDB {
     findByEmail = async(userMail) => {
         try {
-            return await this.model.findOne({email: userMail});
+            return await this.model.findOne({username: userMail});
         } catch (error) {
             console.error("No se pudo buscar el usuario", error)
         }

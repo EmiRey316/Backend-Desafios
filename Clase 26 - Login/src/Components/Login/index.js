@@ -1,8 +1,8 @@
 const express = require("express");
-const { passport } = require("../../server.js");
 
 const loginController = require("./loginController");
-const { isLogged } = require("../Middlewares")
+const { isLogged } = require("../Middlewares");
+const { passport } = require("../../server.js");
 
 
 let loginRouter = express.Router();

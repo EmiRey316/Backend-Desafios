@@ -19,6 +19,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
+
 ////////////////////////////////////////////
 //            Conexión MongoDB            //
 ////////////////////////////////////////////
@@ -79,13 +80,30 @@ passport.use("login", new LocalStrategy(async (username, password, done) => {
     }
 }))
 
+passport.use("signup", new LocalStrategy({
+        passReqToCallback: true
+    }, async (req, username, password, done) => {
+        try {
+            let findUser = await usersList.findByEmail(username);
+            if(findUser) return done("El usuario ya está registrado");
+
+            user = req.body;
+            await usersList.save(user);
+
+            return done(null, user);
+        } catch (error) {
+            console.error("Error en login", error)
+        }
+}))
+
+
 
 passport.serializeUser((user, done)=>{
-    done(null, user.id);
+    done(null, user.username);
 });
 
-passport.deserializeUser((id, done)=>{
-    let user = usersList.findById(id);
+passport.deserializeUser((username, done)=>{
+    let user = usersList.findByEmail(username);
     done(null, user);
 });
 
