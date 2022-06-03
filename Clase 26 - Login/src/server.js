@@ -2,8 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
+
 
 const { PORT, MONGO_ATLAS_URL, SECRET } = require("./Config/index.js");
+const usersList = require("./Container/DAOs/users");
+
 
 
 ////////////////////////////////////////////
@@ -61,18 +67,12 @@ app.use(session({
 ////////////////////////////////////////////
 //                Passport                //
 ////////////////////////////////////////////
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const usersList = require("./Container/DAOs/users")
-
 passport.use("login", new LocalStrategy(async (username, password, done) => {
     try {
         let user = await usersList.findByEmail(username);
         if(!user) return done(null, false);
 
-        if(user.password !== password) {
-            return done(null, false);
-        }
+        if(!await bcrypt.compare(password, user.password)) return done(null, false);
 
         return done(null, user);
     } catch (error) {
@@ -87,7 +87,12 @@ passport.use("signup", new LocalStrategy({
             let findUser = await usersList.findByEmail(username);
             if(findUser) return done("El usuario ya está registrado");
 
-            user = req.body;
+            let user = req.body;
+            
+            user.password = await bcrypt.hash(user.password, 10);
+            console.log(user.password)
+            
+            
             await usersList.save(user);
 
             return done(null, user);
