@@ -9,7 +9,7 @@ class Randoms {
             headers: {quantity: req.query.cant || 100000000}
         })
             .then(response => response.json())
-            .then(data => res.send(data))
+            .then(data => res.render("randoms", {title: "Randoms", randoms: data}))
             .catch(err => console.error(err))
     }
 }

@@ -1,4 +1,4 @@
-const productsApiRouter = require("../Components/ProductsApi");
+const productsApiRouter = require("../Components/API/ProductsApi");
 const randomsApiRouter = require("../Components/API/RandomsApi")
 
 const productsListRouter = require("../Components/ProductsList");

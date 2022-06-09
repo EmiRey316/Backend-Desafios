@@ -24,6 +24,9 @@ app.use(express.static(__dirname+"/public"));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+//Para que los res.json se vean mejor en el browser.
+app.set("json spaces", 2);
+
 
 
 ////////////////////////////////////////////
