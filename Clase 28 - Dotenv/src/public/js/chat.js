@@ -53,8 +53,6 @@ socket.on("chatLog", (data) => {
                 </br>`
     })
     chatLog.innerHTML = messages;
-
-    compressionSpan.innerHTML = compressionPercent.toFixed(2);
 })
 
 
