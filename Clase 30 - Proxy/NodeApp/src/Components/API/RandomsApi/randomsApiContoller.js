@@ -1,5 +1,6 @@
 const { fork } = require("child_process");
 
+
 class RandomsApi {
     get(req, res) {
         const quantity = req.headers.quantity || 100000000;

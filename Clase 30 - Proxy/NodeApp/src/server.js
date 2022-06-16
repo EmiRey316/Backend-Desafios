@@ -31,7 +31,7 @@ const clusterInit = () => {
 
         cluster.on("exit", (worker, code, signal) => {
             console.log(`Worker ${worker.process.pid} stop`);
-            // cluster.fork();
+            cluster.fork();
         })
 
     } else {
@@ -42,7 +42,7 @@ const clusterInit = () => {
 }
 
 
-//Selección del tipo.
+//Selección del tipo dependiendo del MODE.
 switch(config.MODE) {
     case "CLUSTER":
         clusterInit();
@@ -103,6 +103,10 @@ app.use(session({
 }))
 
 
+
+////////////////////////////////////////////
+//                Passport                //
+////////////////////////////////////////////
 
 app.use(passport.initialize());
 app.use(passport.session());

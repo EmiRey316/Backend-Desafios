@@ -14,10 +14,7 @@ class ProcessInfo {
         data.nodeVersion = process.version;
         data.memory = process.memoryUsage.rss();
         data.path = process.execPath;
-        data.numberOfProcess = config.MODE == "FORK" ?
-                                    1
-                                :
-                                    numCPUs + 1;
+        data.numCPUs = numCPUs;
         data.pid = process.pid;
         data.folder = process.argv[1];
 

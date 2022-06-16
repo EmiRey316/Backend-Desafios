@@ -11,6 +11,6 @@ process.on("message", quantity => {
     }
 
     process.send(randoms);
-    process.exit
+    process.exit()
 })
 
