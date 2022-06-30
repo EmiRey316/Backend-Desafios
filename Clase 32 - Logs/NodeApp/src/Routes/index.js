@@ -1,3 +1,5 @@
+const { warnLogger } = require("../Utils/logger.js")
+
 const productsApiRouter = require("../Components/API/ProductsApi");
 const randomsApiRouter = require("../Components/API/RandomsApi")
 
@@ -25,4 +27,10 @@ module.exports = app => {
     app.use("/login", loginRouter);
     app.use("/logout", logoutRouter);
     app.use("/signUp", registrationRouter);
+
+    //404
+    app.get("*", (req, res) => {
+        warnLogger.warn(`Ruta ${req.url} no encontrada`)
+        res.status(404).send("Página no encontrada")
+    });
 }

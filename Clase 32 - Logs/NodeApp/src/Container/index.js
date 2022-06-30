@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const { logger } = require("../Utils/logger")
+
 
 module.exports = class MongoDB {
     constructor(collection, schema) {
@@ -13,8 +15,8 @@ module.exports = class MongoDB {
             let content = await this.model.find({}, {_id: 0, __v: 0});
             if(content.length == 0) return {}
             return content
-        } catch(err) {
-            console.log("No se pudo leer", err)
+        } catch(error) {
+            logger.error("No se pudo hacer lectura de la base", {error})
         }
     }
 
@@ -30,8 +32,8 @@ module.exports = class MongoDB {
 
             await this.model.create({id, ...record});
             return id;
-        } catch(err) {
-            console.log("No se pudo guardar", err)
+        } catch(error) {
+            logger.error("No se pudo guardar en base", {error})
         }
     }
 
@@ -39,15 +41,15 @@ module.exports = class MongoDB {
         try {
             return await this.model.findOne({id: id});
         } catch (error) {
-            console.error("No se pudo buscar el usuario", error)
+            logger.error("No se pudo buscar al usuario en base", {error})
         }
     }
 
     deleteAll = async() => {
         try {
             await await this.model.drop();
-        } catch(err) {
-            console.error("No se pudo borrar el archivo", err)
+        } catch(error) {
+            logger.error("No se pudo borrar el documento", {error})
         }
     }
 }

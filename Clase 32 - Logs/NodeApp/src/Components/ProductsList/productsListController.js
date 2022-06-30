@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 
-const config = require("../../Config")
+const config = require("../../Config");
+const { logger } = require("../../Utils/logger.js");
 
 
 class ProductsList {
@@ -9,7 +10,7 @@ class ProductsList {
         fetch(`http://${config.HOST}:${config.PORT}/api/productos-test`)
             .then(response => response.json())
             .then(data => res.render("products", {title: "Products List", alias: user.alias, avatar: user.avatar, data}))
-            .catch(err => console.error(err))
+            .catch(error => logger.error("Error al obtener lista de productos", {error}))
     }
 }
 

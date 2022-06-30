@@ -1,5 +1,6 @@
 const MongoDB = require("../../index.js");
 const { UsersSchema } = require("../../../Models/mongoModels.js");
+const { logger } = require("../../../Utils/logger");
 
 
 class UsersDao extends MongoDB {
@@ -7,7 +8,7 @@ class UsersDao extends MongoDB {
         try {
             return await this.model.findOne({username: userMail});
         } catch (error) {
-            console.error("No se pudo buscar el usuario", error)
+            logger.error("Error al buscar al usuario en base", {error})
         }
     }
 }

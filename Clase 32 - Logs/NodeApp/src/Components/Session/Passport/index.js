@@ -3,6 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 
 const usersList = require("../../../Container/DAOs/users");
+const { logger } = require("../../../Utils/logger");
 
 
 passport.use("login", new LocalStrategy(async (username, password, done) => {
@@ -14,7 +15,7 @@ passport.use("login", new LocalStrategy(async (username, password, done) => {
 
         return done(null, user);
     } catch (error) {
-        console.error("Error en login", error)
+        logger.error("Error al hacer login", {error})
     }
 }))
 
@@ -32,7 +33,7 @@ passport.use("signup", new LocalStrategy({
             await usersList.save(user);
             return done(null, user);
         } catch (error) {
-            console.error("Error en login", error)
+            logger.error("Error en el registro", {error})
         }
 }))
 

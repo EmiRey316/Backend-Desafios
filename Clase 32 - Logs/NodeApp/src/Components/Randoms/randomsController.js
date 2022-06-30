@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 
-const config = require("../../Config")
+const config = require("../../Config");
+const { logger } = require("../../Utils/logger.js");
 
 
 class Randoms {
@@ -10,7 +11,7 @@ class Randoms {
         })
             .then(response => response.json())
             .then(data => res.render("randoms", {title: "Randoms", randoms: data}))
-            .catch(err => console.error(err))
+            .catch(error => logger.error("Error al obtener randoms", {error}))
     }
 }
 

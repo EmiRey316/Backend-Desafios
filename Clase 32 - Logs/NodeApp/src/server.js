@@ -4,9 +4,12 @@ const numCPUs = require("os").cpus().length;
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const compression = require("compression");
 
 const config = require("./Config/index.js");
-const passport = require("./Components/Session/Passport")
+const passport = require("./Components/Session/Passport");
+const { logger } = require("./Utils/logger.js");
+const { consoleLogger } = require("./Components/Middlewares")
 
 
 ////////////////////////////////////////////
@@ -17,26 +20,26 @@ let server;
 
 const forkInit = () => {
     server = app.listen(config.PORT, config.HOST, () => {
-        console.log(`Server on HOST: ${config.HOST} and PORT: ${config.PORT}, with PROCESS: ${process.pid}`);
+        logger.info(`Server on HOST: ${config.HOST} and PORT: ${config.PORT}, with PROCESS: ${process.pid}`);
     })    
 }
 
 const clusterInit = () => {
     if(cluster.isMaster) {
-        console.log(`Master ${process.pid} is running`)
+        logger.info(`Master ${process.pid} is running`)
 
         for(let i = 0; i < numCPUs; i++) {
             cluster.fork();
         }
 
         cluster.on("exit", (worker, code, signal) => {
-            console.log(`Worker ${worker.process.pid} stop`);
+            logger.info(`Worker ${worker.process.pid} stop`);
             cluster.fork();
         })
 
     } else {
         server = app.listen(config.PORT, config.HOST, () => {
-            console.log(`Server on HOST: ${config.HOST} and PORT: ${config.PORT}, with PROCESS: ${process.pid}`)
+            logger.info(`Server on HOST: ${config.HOST} and PORT: ${config.PORT}, with PROCESS: ${process.pid}`)
         })
     }
 }
@@ -60,6 +63,8 @@ switch(config.MODE) {
 app.use(express.static(__dirname+"/public"));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(compression());
+app.use(consoleLogger)
 
 //Para que los res.json se vean mejor en el browser.
 app.set("json spaces", 2);
@@ -72,10 +77,10 @@ app.set("json spaces", 2);
 (async () => {
     try {
         await mongoose.connect(config.MONGO_ATLAS_URL);
-        console.log("Base Mongo conectada");
+        logger.info("Base Mongo conectada");
     
-    } catch(err) {
-        console.error(`Error: ${err}`)
+    } catch(error) {
+        logger.error("No se pudo conectar a la base Mongo", {error})
     }
 })()
 
@@ -96,7 +101,7 @@ app.use(session({
     }),
 
     secret: config.SECRET,
-    cookie: {maxAge: 6000000}, //1 min de session
+    cookie: {maxAge: 6000000}, //10 min de session
     rolling: true,
     resave: true,
     saveUninitialized: true
