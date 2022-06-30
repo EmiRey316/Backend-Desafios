@@ -1,30 +1,20 @@
-**Comandos ejecutados desde la carpeta NodeApp**
+# Conclusiones
 
-# NODEMON
-1. nodemon src/app.js -p 8080 -m fork       ----> Se abren 2 procesos
-2. nodemon src/app.js -p 8080 -m cluster    ----> Se abren 6 procesos
+## Comentarios previos
+No dejo el pdf ya que son muchos test y quedaría desordenado. Me pareció mejor ordenar todo en la carpeta Files, dentro de src. Ahí quedó todo separado en carpeta por cada conjunto de pruebas y con los archivos organizados.
+En esa carpeta también está el error.log y el warn.log.
 
-# FOREVER
-1. forever start src/app.js --watch -p 8080 -m fork       ----> Se abren 2 procesos
-2. forever start src/app.js --watch -p 8080 -m cluster    ----> Se abren 6 procesos
+Las pruebas las hice en /info y en los puntos 2 y 3 también en /randoms. Saqué la validación de sesión de ambas rutas para que los test corrieran sin problemas.
 
-# PM2
-No sé si PM2 tuvo alguna actualización posterior a que se hiciera la ppt de la clase, pero ya no funciona pasar argumentos luego de --, es más, no se puede pasar argumentos de ninguna forma como vimos con el profesor.
-Lo que hice fue crear un archivo ecosystem.config.js, que pasa las opciones como env y ahí las capturo. Por lo tanto solo hago 1 ejecución que corre todos los servidores necesarios:
-1. pm2 start src/Config/ecosystem.config.js
+## 1-Perfilamiento del servidor
+En este primer test lo que veo es que el profiling de la prueba sin console.log tiene más ticks que el que si tiene log, siendo que este debería ser el bloqueante.
+Según está en las diapositivas debería ser al revés, pero realicé varias pruebas siempre con el mismo resultado. Incluso probé con 3 console.log en la misma ruta, y quedó incluso con menos ticks que cuando tenía solo 1.
+Por parte de artillery si que hay más consultas por segundo y la media es menos en el caso del proceso no bloqueante.
 
+## 2-Inspect
+Como se ve en el informe de Chrome, el proceso que tuvo más demora obviamente fue la api de randoms, que llevó más de 27 segundos.
+El siguiente ya es directamente del ruteo de Node, que llevó poco más de 1 segundo.
+Por parte de las imagenes, se ve que ambas rutas tuvieron algunos errores y timeouts, sobre todo en el caso de randoms como es esperable. Entiendo que los errores con /info son principalmente porque también estaba /randoms bloqueando.
 
-En los 3 casos hice prueba para finalizar procesos, y en modo Cluster se vuelven a levantar correctamente.
-
-
-***
-
-
-# NGINX
-* Parte 1
-1. Primero inicio los servidores como se describe arriba con Forever o PM2, no se puede usar Nodemon porque bloquea la terminal.
-2. Luego inicio nginx.exe.
-
-* Parte 2
-1. Nuevamente se pueden iniciar los servidores con Forever o PM2. En caso de este último habría que comentar el cluster de 8081 y descomentar el resto.
-2. Nuevamente iniciar nginx.exe.
+## 3.Diagrama de Flama
+Todo se ve sobre el mismo stack, que llega a Naranjo nuevamente por la parte de la api de Randoms.

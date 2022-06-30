@@ -5,7 +5,8 @@ const { validateSession } = require("../Middlewares");
 
 
 let randomsRouter = express.Router();
-randomsRouter.get("/", validateSession, randomsController.get)
+//Saco la validación de login para que los test ingresen sin problemas y evaluen correctamente la ruta.
+randomsRouter.get("/", randomsController.get)
 
 
 module.exports = randomsRouter;

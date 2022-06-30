@@ -5,7 +5,8 @@ const { validateSession } = require("../Middlewares");
 
 
 let processInfoRouter = express.Router();
-processInfoRouter.get("/", validateSession, processInfoController.get)
+//Saco la validación de sesión para que los test tengan sentido, sino nunca hago el console.log
+processInfoRouter.get("/", processInfoController.get)
 
 
 module.exports = processInfoRouter;
