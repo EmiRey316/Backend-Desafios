@@ -6,8 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/app.js",
-    "start": "0x src/app.js",
-    "test": "node src/Utils/autocannon.js"
+    "start": "node src/app.js"
   },
   "keywords": [],
   "author": "",

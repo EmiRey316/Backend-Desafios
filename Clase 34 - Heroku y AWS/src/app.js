@@ -7,7 +7,7 @@ const chatMongo = require("./Container/DAOs/chat/index.js");
 const Routes = require("./Routes");
 
 
-Routes(app);
+Routes(app)
 
 
 ////////////////////////////////////////////

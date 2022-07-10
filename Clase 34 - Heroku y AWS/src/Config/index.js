@@ -20,8 +20,8 @@ const args = parseArgs(process.argv.slice(2), options);
 
 
 const config = {
-    HOST: process.env.HOST || "127.0.0.1",
     PORT: args.PORT,
+    PID: process.pid,
     MODE: args.MODE.toUpperCase(),
     MONGO_ATLAS_URL: process.env.MONGO_ATLAS_URL,
     SECRET: process.env.SECRET

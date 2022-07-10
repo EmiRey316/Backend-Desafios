@@ -1,0 +1,22 @@
+#productFormDiv {
+    background-color: lightgray;
+    width: 90%;
+}
+
+h1 {
+    color: blue;
+}
+
+#productListEmpty {
+    background-color: darkgoldenrod;
+    width: 30%;
+}
+
+table {
+    background-color: rgb(53, 53, 53);
+}
+
+tr {
+    color: white;
+    width: 100%;
+}

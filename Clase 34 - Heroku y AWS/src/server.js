@@ -15,48 +15,46 @@ const { consoleLogger } = require("./Components/Middlewares")
 ////////////////////////////////////////////
 //      Inicialización del servidor       //
 ////////////////////////////////////////////
+
 const app = express();
-let server;
-
-const forkInit = () => {
-    server = app.listen(config.PORT, config.HOST, () => {
-        logger.info(`Server on HOST: ${config.HOST} and PORT: ${config.PORT}, with PROCESS: ${process.pid}`);
-    })    
-}
-
-const clusterInit = () => {
-    if(cluster.isMaster) {
-        logger.info(`Master ${process.pid} is running`)
-
-        for(let i = 0; i < numCPUs; i++) {
-            cluster.fork();
-        }
-
-        cluster.on("exit", (worker, code, signal) => {
-            logger.info(`Worker ${worker.process.pid} stop`);
-            cluster.fork();
-        })
-
-    } else {
-        server = app.listen(config.PORT, config.HOST, () => {
-            logger.info(`Server on HOST: ${config.HOST} and PORT: ${config.PORT}, with PROCESS: ${process.pid}`)
-        })
-    }
-}
+let server = app.listen(config.PORT, () => {
+    logger.info(`Server on PORT: ${config.PORT}, with PROCESS: ${config.PID}`);
+})    
 
 
-//Selección del tipo dependiendo del MODE.
-switch(config.MODE) {
-    case "CLUSTER":
-        clusterInit();
-        break;
-    case "FORK":
-        forkInit();
-        break;
-    default:
-        forkInit();
-        break;
-}
+// const clusterInit = () => {
+//     if(cluster.isMaster) {
+//         logger.info(`Master ${process.pid} is running`)
+
+//         for(let i = 0; i < numCPUs; i++) {
+//             cluster.fork();
+//         }
+
+//         cluster.on("exit", (worker, code, signal) => {
+//             logger.info(`Worker ${worker.process.pid} stop`);
+//             cluster.fork();
+//         })
+
+//     } else {
+//         server = app.listen(config.PORT, config.HOST, () => {
+//             logger.info(`Server on HOST: ${config.HOST} and PORT: ${config.PORT}, with PROCESS: ${process.pid}`)
+//         })
+//     }
+// }
+
+
+// //Selección del tipo dependiendo del MODE.
+// switch(config.MODE) {
+//     case "CLUSTER":
+//         clusterInit();
+//         break;
+//     case "FORK":
+//         forkInit();
+//         break;
+//     default:
+//         forkInit();
+//         break;
+// }
 
 
 

@@ -35,7 +35,7 @@ io.on('connection', async(socket)=>{
     let lgNormal = JSON.stringify(chatLog).length;
 
     let normalizedChat = normalize(chatLog, chatSchema);
-    //console.log(util.inspect(normalizedChat, false, 12, true));
+    console.log(util.inspect(normalizedChat, false, 12, true));
     let lgNormalized = JSON.stringify(normalizedChat).length;
 
     let compressionPercent = (lgNormalized * 100) / lgNormal;

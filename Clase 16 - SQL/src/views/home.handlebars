@@ -1,0 +1,35 @@
+<a href="/productos"><button class="btn btn-success">Productos</button></a>
+<div id="productFormDiv">
+    <h1>Ingrese un Producto</h1>
+    <form id="productsForm" class="m-4" action="/productos" method="post">
+        <label for="name" class="form-label"><strong>Nombre</strong></label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="John" required>
+
+        <label for="price" class="form-label"><strong>Precio</strong></label>
+        <input type="number" name="price" id="price" class="form-control" placeholder="Doe" required>
+
+        <label for="thumbnail" class="form-label"><strong>Foto URL</strong></label>
+        <input type="text" name="thumbnail" id="thumbnail" class="form-control" placeholder="https://urlFoto.com" required>
+
+        <button type="submit" class="btn btn-success mt-3">Enviar</button>
+    </form>
+
+    <div class="classicDiv m-4 p-4">
+    <h1 class="text-center">Centro de mensajes</h1>
+    {{!-- <h2 class="text-center">(Compresión: <span id="compressionSpan"></span>%)</h2> --}}
+
+
+    <div id="chatLog" class="mb-2"></div>
+    <hr>
+    <div class="row justify-content-around">
+        <input type="text" name="chatInput" id="chatInput" class="col-9 border-0 rounded" placeholder="Ingresá un mensaje...">
+        <button id="sendBtn" class="btn btn-primary col-2">Enviar</button>
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="../main.js"></script>
+
+</div>
