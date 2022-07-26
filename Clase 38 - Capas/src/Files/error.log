@@ -1,0 +1,138 @@
+{
+  error: MongoParseError: Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+      at new ConnectionString (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\desafios\Clase 32 - Logs\NodeApp\node_modules\mongodb-connection-string-url\lib\index.js:86:19)
+      at parseOptions (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\desafios\Clase 32 - Logs\NodeApp\node_modules\mongoose\node_modules\mongodb\lib\connection_string.js:213:17)
+      at new MongoClient (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\desafios\Clase 32 - Logs\NodeApp\node_modules\mongoose\node_modules\mongodb\lib\mongo_client.js:62:63)
+      at C:\Users\erey\OneDrive\Desktop\Coder House\Backend\desafios\Clase 32 - Logs\NodeApp\node_modules\mongoose\lib\connection.js:784:16
+      at new Promise (<anonymous>)
+      at NativeConnection.Connection.openUri (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\desafios\Clase 32 - Logs\NodeApp\node_modules\mongoose\lib\connection.js:781:19)
+      at C:\Users\erey\OneDrive\Desktop\Coder House\Backend\desafios\Clase 32 - Logs\NodeApp\node_modules\mongoose\lib\index.js:344:10
+      at C:\Users\erey\OneDrive\Desktop\Coder House\Backend\desafios\Clase 32 - Logs\NodeApp\node_modules\mongoose\lib\helpers\promiseOrCallback.js:32:5
+      at new Promise (<anonymous>)
+      at promiseOrCallback (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\desafios\Clase 32 - Logs\NodeApp\node_modules\mongoose\lib\helpers\promiseOrCallback.js:31:10),
+  level: 'error',
+  message: 'No se pudo conectar a la base Mongo',
+  timestamp: '2022-06-29T06:01:48.026Z'
+}
+{
+  error: ReferenceError: mongoose is not defined
+      at C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\src\app.js:41:9
+      at Object.<anonymous> (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\src\app.js:47:3)
+      at Module._compile (node:internal/modules/cjs/loader:1105:14)
+      at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+      at Module.load (node:internal/modules/cjs/loader:981:32)
+      at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+      at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+      at node:internal/main/run_main_module:17:47,
+  level: 'error',
+  message: 'No se pudo conectar a la base Mongo',
+  timestamp: '2022-07-07T03:21:13.024Z'
+}
+{
+  error: FetchError: request to http://undefined/api/randoms failed, reason: getaddrinfo ENOTFOUND undefined
+      at ClientRequest.<anonymous> (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\node_modules\node-fetch\lib\index.js:1491:11)
+      at ClientRequest.emit (node:events:527:28)
+      at Socket.socketErrorListener (node:_http_client:454:9)
+      at Socket.emit (node:events:527:28)
+      at emitErrorNT (node:internal/streams/destroy:157:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+    type: 'system',
+    errno: 'ENOTFOUND',
+    code: 'ENOTFOUND'
+  },
+  level: 'error',
+  message: 'Error al obtener randoms',
+  timestamp: '2022-07-08T23:06:24.633Z'
+}
+{
+  error: FetchError: request to http://undefined/api/randoms failed, reason: getaddrinfo ENOTFOUND undefined
+      at ClientRequest.<anonymous> (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\node_modules\node-fetch\lib\index.js:1491:11)
+      at ClientRequest.emit (node:events:527:28)
+      at Socket.socketErrorListener (node:_http_client:454:9)
+      at Socket.emit (node:events:527:28)
+      at emitErrorNT (node:internal/streams/destroy:157:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+    type: 'system',
+    errno: 'ENOTFOUND',
+    code: 'ENOTFOUND'
+  },
+  level: 'error',
+  message: 'Error al obtener randoms',
+  timestamp: '2022-07-08T23:20:58.084Z'
+}
+{
+  error: FetchError: request to http://undefined/api/randoms failed, reason: getaddrinfo ENOTFOUND undefined
+      at ClientRequest.<anonymous> (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\node_modules\node-fetch\lib\index.js:1491:11)
+      at ClientRequest.emit (node:events:527:28)
+      at Socket.socketErrorListener (node:_http_client:454:9)
+      at Socket.emit (node:events:527:28)
+      at emitErrorNT (node:internal/streams/destroy:157:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+    type: 'system',
+    errno: 'ENOTFOUND',
+    code: 'ENOTFOUND'
+  },
+  level: 'error',
+  message: 'Error al obtener randoms',
+  timestamp: '2022-07-08T23:21:45.892Z'
+}
+{
+  error: FetchError: invalid json response body at http://localhost:8080/api/randoms reason: Unexpected token l in JSON at position 0
+      at C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\node_modules\node-fetch\lib\index.js:273:32
+      at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+    type: 'invalid-json'
+  },
+  level: 'error',
+  message: 'Error al obtener randoms',
+  timestamp: '2022-07-09T00:02:42.278Z'
+}
+{
+  error: FetchError: invalid json response body at http://localhost:8080/api/randoms reason: Unexpected token l in JSON at position 0
+      at C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\node_modules\node-fetch\lib\index.js:273:32
+      at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+    type: 'invalid-json'
+  },
+  level: 'error',
+  message: 'Error al obtener randoms',
+  timestamp: '2022-07-09T00:02:51.712Z'
+}
+{
+  error: FetchError: invalid json response body at http://localhost:8080/api/randoms reason: Unexpected token l in JSON at position 0
+      at C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\node_modules\node-fetch\lib\index.js:273:32
+      at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+    type: 'invalid-json'
+  },
+  level: 'error',
+  message: 'Error al obtener randoms',
+  timestamp: '2022-07-09T00:03:52.719Z'
+}
+{
+  error: FetchError: invalid json response body at http://localhost:8080/api/randoms reason: Unexpected token l in JSON at position 0
+      at C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\node_modules\node-fetch\lib\index.js:273:32
+      at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+    type: 'invalid-json'
+  },
+  level: 'error',
+  message: 'Error al obtener randoms',
+  timestamp: '2022-07-09T00:04:37.519Z'
+}
+{
+  error: FetchError: request to http://undefined/api/productos-test failed, reason: getaddrinfo ENOTFOUND undefined
+      at ClientRequest.<anonymous> (C:\Users\erey\OneDrive\Desktop\Coder House\Backend\Heroku\Clase 34 - Heroku\node_modules\node-fetch\lib\index.js:1491:11)
+      at ClientRequest.emit (node:events:527:28)
+      at Socket.socketErrorListener (node:_http_client:454:9)
+      at Socket.emit (node:events:527:28)
+      at emitErrorNT (node:internal/streams/destroy:157:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+    type: 'system',
+    errno: 'ENOTFOUND',
+    code: 'ENOTFOUND'
+  },
+  level: 'error',
+  message: 'Error al obtener lista de productos',
+  timestamp: '2022-07-10T03:44:50.860Z'
+}
