@@ -6,7 +6,7 @@ const { logger } = require("../../../Utils/logger");
 class UsersDao extends MongoDB {
     findByEmail = async(userMail) => {
         try {
-            return await this.model.findOne({username: userMail});
+            return await this.model.findOne({username: userMail}).lean();
         } catch (error) {
             logger.error("Error al buscar al usuario en base", {error})
         }

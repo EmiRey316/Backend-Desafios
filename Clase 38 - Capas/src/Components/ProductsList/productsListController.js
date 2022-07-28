@@ -9,7 +9,7 @@ class ProductsList {
         const user = await req.user;
         fetch(`http://${host}/api/productos-test`)
             .then(response => response.json())
-            .then(data => res.render("products", {title: "Products List", alias: user.alias, avatar: user.avatar, data}))
+            .then(data => res.render("products", {title: "Products List", user, data}))
             .catch(error => logger.error("Error al obtener lista de productos", {error}))
     }
 }

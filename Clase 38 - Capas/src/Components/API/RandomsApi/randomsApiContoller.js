@@ -5,7 +5,7 @@ class RandomsApi {
     get(req, res) {
         const quantity = req.headers.quantity || 1000000;
 
-        let randomFork = fork("./src/Components/API/RandomsApi/randomCalculator.js")
+        let randomFork = fork("./src/Components/API/RandomsApi/randomsApiCalculator.js")
         randomFork.send(quantity);
 
         randomFork.on("message", randoms => {
