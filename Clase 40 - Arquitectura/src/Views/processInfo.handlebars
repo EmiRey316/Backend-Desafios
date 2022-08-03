@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="/css/productsTest.css">
+
+{{> navbar}}
+
+
+<h1 class="text-center mt-5">Info del proceso</h1>
+
+<div id="productsTest" class="container">
+    <table class="table text-center rounded">
+        <tr class="row">
+            <th scope="col" class="col-6">Nombre</th>
+            <th scope="col" class="col-6">Valor</th>
+        </tr>
+
+        <tr scope="row" class="row">
+            <td class="col-6">Argumentos de entrada</td>
+            <td class="col-6">{{data.args}}</td>
+        </tr>
+
+        <tr scope="row" class="row">
+            <td class="col-6">Nombre de la plataforma</td>
+            <td class="col-6">{{data.platform}}</td>
+        </tr>
+
+        <tr scope="row" class="row">
+            <td class="col-6">Version de Node.js</td>
+            <td class="col-6">{{data.nodeVersion}}</td>
+        </tr>
+
+        <tr scope="row" class="row">
+            <td class="col-6">Memoria total reservada(rss)</td>
+            <td class="col-6">{{data.memory}}</td>
+        </tr>
+
+        <tr scope="row" class="row">
+            <td class="col-6">Path de ejecución</td>
+            <td class="col-6">{{data.path}}</td>
+        </tr>
+
+        <tr scope="row" class="row">
+            <td class="col-6">Número de Procesadores</td>
+            <td class="col-6">{{data.numCPUs}}</td>
+        </tr>
+
+        <tr scope="row" class="row">
+            <td class="col-6">Process ID</td>
+            <td class="col-6">{{data.pid}}</td>
+        </tr>
+
+        <tr scope="row" class="row">
+            <td class="col-6">Carpeta del proyecto</td>
+            <td class="col-6">{{data.folder}}</td>
+        </tr>
+        
+    </table>
+</div>
