@@ -36,11 +36,13 @@ const saveMessage = () => {
 //Evento que eschucha la escritura en el input del chat.
 chatInput.addEventListener("keyup", evt => {
     if(evt.key === "Enter"){
+        console.log("Enter")
         saveMessage();
     }
 })
 
 sendBtn.addEventListener("click", () => {
+    console.log("Enviar")
     saveMessage();
 })
 
@@ -55,6 +57,7 @@ socket.on("newProduct", data => {
 socket.on("chatLog", data => {
     const chatLog = document.getElementById("chatLog");
     let messages = "";
+    console.log(data)
     data.forEach(message => {
         messages = messages + `
                 <strong>${message.user}</strong>

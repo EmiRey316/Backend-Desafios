@@ -3,10 +3,10 @@
     <h1>Ingrese un Producto</h1>
     <form id="productsForm" class="m-4" action="/productos" method="post">
         <label for="name" class="form-label"><strong>Nombre</strong></label>
-        <input type="text" name="name" id="name" class="form-control" placeholder="John" required>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Producto" required>
 
         <label for="price" class="form-label"><strong>Precio</strong></label>
-        <input type="number" name="price" id="price" class="form-control" placeholder="Doe" required>
+        <input type="number" name="price" id="price" class="form-control" placeholder="999" required>
 
         <label for="thumbnail" class="form-label"><strong>Foto URL</strong></label>
         <input type="text" name="thumbnail" id="thumbnail" class="form-control" placeholder="https://urlFoto.com" required>
@@ -30,6 +30,6 @@
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="../main.js"></script>
+<script src="./main.js"></script>
 
 </div>

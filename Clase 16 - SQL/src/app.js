@@ -21,7 +21,7 @@ app.use(express.json());
 ////////////////////////////////////////////
 //              Persistencia              //
 ////////////////////////////////////////////
-//let productsList = new Archive("./src/Files/productsList.txt");
+let productsList = require("./Container/DAOS/productsSQL.js");
 let chatRecord = require("./Container/DAOS/chatSQL.js");
 
 

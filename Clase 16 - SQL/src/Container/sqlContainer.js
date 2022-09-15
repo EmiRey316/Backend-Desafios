@@ -1,45 +1,32 @@
 class DataBase {
-    constructor() {
-        this.knex = require("knex")({
-            client: "sqlite3",
-            connection: {
-                filename: "../DB/chat.sqlite"
-            },
-            useNullAsDefault: true
-        })
+    constructor(options, tableName) {
+        this.knex = require("knex")(options),
+        this.table = tableName
     }
 
-    read = () => {
-        this.knex.schema.createTable("chat", table => {
-            table.increments("id");
-            table.string("user");
-            table.string("message");
-            table.string("date");
+    read() {
+        let result = this.knex.from(this.table).select("*");
+        return result.then(rows => {
+            return rows
+        }).catch(err => {
+            console.log("Error al leer tabla", err);
+            throw err
         })
 
-        this.knex.from("chat").select("*")
-            .then(rows => {return rows})
-            .catch(err => {
-                console.log("Error al leer tabla", err);
-                throw err
-            })
-            .finally(() => this.knex.destroy())
     }
 
     save = (record) => {
-        console.log("record: ", record)
-        this.knex("chat").insert([
-            {
-                user: record.user,
-                message: record.message,
-                date: record.date
-            }
-        ])
+        this.knex(this.table).insert(record)
+            .then(() => console.log("Data insertada en " + this.table))
+            .catch(err => {
+                console.log("Error al guardar en tabla", err);
+                throw err
+            })
     }
 
     delete = async() => {
         try {
-            await fs.promises.unlink(this.name);
+            await fs.promises.unlink(this.table);
         } catch(err) {
             console.error("No se pudo borrar el archivo", err)
         }
